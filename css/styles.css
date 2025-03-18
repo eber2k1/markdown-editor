@@ -1,0 +1,33 @@
+.header {
+    grid-area: header;
+}
+
+.main-content {
+    grid-area: main;
+}
+
+.footer {
+    grid-area: footer;
+}
+
+/* Mobile layout (header at bottom) */
+@media (max-width: 767px) {
+    body {
+        grid-template-areas:
+            "main"
+            "header"
+            "footer";
+        grid-template-rows: 1fr auto auto;
+    }
+}
+
+/* Desktop layout (header at top) */
+@media (min-width: 768px) {
+    body {
+        grid-template-areas:
+            "header"
+            "main"
+            "footer";
+        grid-template-rows: auto 1fr auto;
+    }
+}

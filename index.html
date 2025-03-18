@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="stylesheet" href="./css/styles.css">
+</head>
+
+<body class="h-screen bg-white text-gray-800 grid overflow-hidden ">
+
+    <header class="header h-[7vh]">
+        <button id="generate-html" class="h-full w-full bg-gray-950 hover:bg-gray-700 text-white border border-2 border-gray-900 transition-colors duration-200">Generar Vista Previa</button>
+    </header>
+
+    <main class="main-content h-[83vh] flex flex-col lg:flex-row  p-4 gap-4 overflow-auto ">
+        <textarea id="markdown-input" class="w-full h-full border border-gray-800 rounded" placeholder="Escribe tu markdown"></textarea>
+
+        <div id="preview-section" class="w-full h-full border border-gray-800 rounded overflow-y-auto break-words whitespace-normal" > preview </div>
+    </main>
+
+    <footer class="footer h-[7vh] bg-gray-500 text-white text-center text-sm">
+        <p>© 2025 Markdown Editor - Creado por <i class="fa-brands fa-github"></i> <a href="https://github.com/eber2k1" class="text-blue-500 hover:underline">eber2k1</a> </p>
+    </footer>
+
+    <script src="./js/app.js"></script>
+</body>
+
+</html>
