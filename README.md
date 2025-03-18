@@ -12,10 +12,6 @@
 
 Este proyecto es un editor de Markdown que permite a los usuarios escribir texto en formato Markdown y ver la vista previa HTML en tiempo real. La aplicación es totalmente responsiva, adaptándose a dispositivos móviles y de escritorio con diferentes layouts.
 
-<div align="center">
-  <img src="https://via.placeholder.com/800x400?text=Markdown+Editor+Preview" alt="Markdown Editor Preview" width="80%">
-</div>
-
 ## ✨ Características Implementadas
 
 ### 📋 Historias de Usuario Completadas
@@ -85,10 +81,6 @@ markdown-editor/
 2. 👁️ Haz clic en el botón "Vista Previa" para ver el resultado HTML
 3. 🎭 Usa el botón "Contrastar Encabezados" para resaltar los títulos con diferentes colores
 4. 🔢 El contador de caracteres se actualiza automáticamente mientras escribes
-
-<div align="center">
-  <img src="https://via.placeholder.com/600x300?text=Demo+GIF" alt="Demo GIF" width="60%">
-</div>
 
 ## 📌 Características de Markdown Soportadas
 
