@@ -36,11 +36,9 @@
                 <i class="fas fa-edit mr-2"></i>
                 <span class="font-medium">Editor Markdown</span>
             </div>
-            <textarea 
-                id="markdown-input" 
-                class="w-full flex-grow p-4 border-0 focus:ring-0 focus:outline-none bg-gray-50" 
-                placeholder="Escribe tu markdown aquí...">
-            </textarea>
+            <textarea id="markdown-input" 
+            class="w-full flex-grow p-4 border-0 focus:ring-0 focus:outline-none bg-gray-50" 
+            placeholder="Escribe tu markdown aquí..."></textarea>
         </div>
 
         <div class="w-full h-full flex flex-col rounded-lg shadow-md overflow-hidden">
@@ -51,7 +49,10 @@
             <div 
                 id="preview-section" 
                 class="w-full flex-grow p-4 overflow-y-auto break-words whitespace-normal bg-gray-50">
-                preview
+                Previsualización
+            </div>
+            <div class="bg-gray-50 p-2">
+                número de caracteres: <span id="character-count">0</span>
             </div>
         </div>
     </main>
