@@ -10,7 +10,6 @@
     grid-area: footer;
 }
 
-/* Mobile layout (header at bottom) */
 @media (max-width: 767px) {
     body {
         grid-template-areas:
@@ -21,7 +20,6 @@
     }
 }
 
-/* Desktop layout (header at top) */
 @media (min-width: 768px) {
     body {
         grid-template-areas:

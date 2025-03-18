@@ -4,6 +4,7 @@
 const generateHtml = document.querySelector("#generate-html");
 const markdownInput = document.querySelector("#markdown-input");
 const previewSection = document.querySelector("#preview-section");
+const contrastHeadings = document.querySelector("#contrast-headings");
 
 function getTextFromTextArea() {
   const text = markdownInput.value;
@@ -37,13 +38,47 @@ function convertHeadings(html) {
   return html;
 }
 
+function convertLists(html) {
+  html = html.replace(/^\* (.+)$/gm, "<li>$1</li>");
+  html = html.replace(/^\* (.+)$/gm, "<ul>$1</ul>");
+  return html;
+}
+
+function convertLinks(html) {
+  html = html.replace(/\[(.+)\]\((.+)\)/gm, "<a href='$2'>$1</a>");
+  return html;
+}
+
+function convertBold(html) {
+  html = html.replace(/\*\*(.+)\*\*/gm, "<strong>$1</strong>");
+  return html;
+}
+
+function convertItalic(html) {
+  html = html.replace(/\*(.+)\*/gm, "<em>$1</em>");
+  return html;
+}
+
+function convertBoldItalic(html) {
+  html = html.replace(/\*\*\*(.+)\*\*\*/gm, "<strong><em>$1</em></strong>");
+  return html;
+}
+
 function convertToHtml(text) {
   let html = text;
   // evaluamos titulo
   html = convertHeadings(html);
   // evaluamos listas
+  html = convertLists(html);
   // evaluamos enlaces
-
+  html = convertLinks(html);
+  // evaluamos negrita
+  html = convertBold(html);
+  // evaluamos cursiva
+  html = convertItalic(html);
+  // evaluamos negrita y cursiva
+  html = convertBoldItalic(html);
+  
   return html;
 }
 

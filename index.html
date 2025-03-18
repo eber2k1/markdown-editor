@@ -1,29 +1,67 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="es">
 
 <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Document</title>
+    <title>Markdown Editor</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="stylesheet" href="./css/styles.css">
 </head>
 
-<body class="h-screen bg-white text-gray-800 grid overflow-hidden ">
+<body class="h-screen text-gray-800 bg-gray-700 grid overflow-hidden">
 
-    <header class="header h-[7vh]">
-        <button id="generate-html" class="h-full w-full bg-gray-950 hover:bg-gray-700 text-white border border-2 border-gray-900 transition-colors duration-200">Generar Vista Previa</button>
+    <header class="header h-[10vh] flex items-center justify-center gap-4 bg-gray-800 shadow-md">
+        <div class="flex space-x-4 my-5">
+            <button 
+                id="generate-html" 
+                class="h-9 px-4 bg-gray-900 hover:bg-gray-700 text-gray-100 border border-gray-700 rounded-md shadow-sm transition-all duration-200 flex items-center space-x-2 transform hover:scale-105 ">
+                <i class="fas fa-eye"></i>
+                <span class="hidden md:block">Vista Previa</span>
+            </button>
+
+            <button 
+                id="contrast-headings" 
+                class="h-9 px-4 bg-gray-900 hover:bg-gray-700 text-gray-100 border border-gray-700 rounded-md shadow-sm transition-all duration-200 flex items-center space-x-2 transform hover:scale-105">
+                <i class="fas fa-heading"></i>
+                <span class="hidden md:block">Contrastar Encabezados</span>
+            </button>
+        </div>
     </header>
 
-    <main class="main-content h-[83vh] flex flex-col lg:flex-row  p-4 gap-4 overflow-auto ">
-        <textarea id="markdown-input" class="w-full h-full border border-gray-800 rounded" placeholder="Escribe tu markdown"></textarea>
+    <main class="main-content h-[83vh] flex flex-col lg:flex-row p-4 gap-6 overflow-auto">
+        <div class="w-full h-full flex flex-col rounded-lg shadow-md overflow-hidden">
+            <div class="bg-gray-800 text-gray-100 px-4 py-2 flex items-center">
+                <i class="fas fa-edit mr-2"></i>
+                <span class="font-medium">Editor Markdown</span>
+            </div>
+            <textarea 
+                id="markdown-input" 
+                class="w-full flex-grow p-4 border-0 focus:ring-0 focus:outline-none bg-gray-50" 
+                placeholder="Escribe tu markdown aquí...">
+            </textarea>
+        </div>
 
-        <div id="preview-section" class="w-full h-full border border-gray-800 rounded overflow-y-auto break-words whitespace-normal" > preview </div>
+        <div class="w-full h-full flex flex-col rounded-lg shadow-md overflow-hidden">
+            <div class="bg-gray-800 text-gray-100 px-4 py-2 flex items-center">
+                <i class="fas fa-file-alt mr-2"></i>
+                <span class="font-medium">Vista Previa</span>
+            </div>
+            <div 
+                id="preview-section" 
+                class="w-full flex-grow p-4 overflow-y-auto break-words whitespace-normal bg-gray-50">
+                preview
+            </div>
+        </div>
     </main>
 
-    <footer class="footer h-[7vh] bg-gray-500 text-white text-center text-sm">
-        <p>© 2025 Markdown Editor - Creado por <i class="fa-brands fa-github"></i> <a href="https://github.com/eber2k1" class="text-blue-500 hover:underline">eber2k1</a> </p>
+    <footer class="footer h-[7vh] bg-gray-900 text-gray-300 flex items-center justify-center shadow-inner">
+        <p class="flex items-center">
+            <span> 2025 Markdown Editor - Creado por</span>
+            <i class="fa-brands fa-github mx-2 text-gray-100"></i>
+            <a href="https://github.com/eber2k1" class="text-blue-400 hover:text-blue-300 hover:underline transition-colors">eber2k1</a>
+        </p>
     </footer>
 
     <script src="./js/app.js"></script>
