@@ -1,6 +1,23 @@
-function getTextFromTextArea() {
-    const text = markdownInput.value;
+function toggleFormat(text) {
+    if (state === 0) {
+        text = text.replace(selectedText, selectedText);
+    } else if (state === 1) {
+        text = text.replace(selectedText, `**${selectedText}**`);
+    } else {
+        text = text.replace(selectedText, `*${selectedText}*`);
+    }
     return text;
+}
+
+
+function getTextFromTextArea(callback) {
+    let text = markdownInput.value;
+    if (text === "") {
+        alert("Debe ingresar un texto para poder generar el MD");
+        return;
+      }
+      text = toggleFormat(text);
+    callback(text);
 }
 
 function convertHeadings(html) {
@@ -30,12 +47,6 @@ function convertHeadings(html) {
     return html;
 }
 
-function convertLists(html) {
-    html = html.replace(/^\* (.+)$/gm, "<li>$1</li>");
-    html = html.replace(/^\* (.+)$/gm, "<ul>$1</ul>");
-    return html;
-}
-
 function convertLinks(html) {
     html = html.replace(/\[(.+)\]\((.+)\)/gm, "<a href='$2'>$1</a>");
     return html;
@@ -60,18 +71,20 @@ function convertToHtml(text) {
     let html = text;
     // evaluamos titulo
     html = convertHeadings(html);
-    // evaluamos listas
-    html = convertLists(html);
-    // evaluamos enlaces
-    html = convertLinks(html);
     // evaluamos negrita
     html = convertBold(html);
     // evaluamos cursiva
     html = convertItalic(html);
     // evaluamos negrita y cursiva
     html = convertBoldItalic(html);
+    // evaluamos listas desordenadas
+    html = convertListUnordered(html);
+    // evaluamos listas ordenadas
+    html = convertListOrdered(html);
+    // evaluamos enlaces
+    html = convertLinks(html);
 
-    return html;
+    renderPreview(html);
 }
 
 function renderPreview(html) {

@@ -10,14 +10,27 @@ const contrastHeadings = document.querySelector("#contrast-headings");
 const characterCount = document.querySelector("#character-count");
 // Boton de aplicar formato
 const applyFormat = document.querySelector("#apply-format");
+// Texto del boton de aplicar formato
+const formatType = document.querySelector("#format-type");
+
+let state = 0;
+let selectedText = "";
+
+
+function changeBtnFormat() {
+    let formats = [
+        `<i class="fa-solid fa-bold"></i> <span class="hidden md:block">negrita</span>`,
+        `<i class="fa-solid fa-italic"></i> <span class="hidden md:block">cursiva</span>`,
+        `<i class="fas fa-paint-brush"></i> <span class="hidden md:block">sin formato</span>`
+    ];
+    applyFormat.innerHTML = formats[state];
+    state = (state + 1) % formats.length;
+}
 
 
 // TODO: Cuando hagamos click en el boton generateHtml, tenemos que obtener el texto del textarea y trasnformalo a HTML y eso mostrarlo el preview
 generateHtml.addEventListener("click", function () {
-
-    const text = getTextFromTextArea();
-    const html = convertToHtml(text);
-    renderPreview(html);
+    getTextFromTextArea(convertToHtml);
 });
 
 // TODO: Cuando hagamos click en el boton contrastHeadings, tenemos que contrastar los encabezados
@@ -27,18 +40,17 @@ contrastHeadings.addEventListener("click", function () {
 
 // TODO: Cuando hagamos click en el boton generateHtml, tenemos que obtener el texto del textarea y trasnformalo a HTML y eso mostrarlo el preview
 markdownInput.addEventListener("input", function () {
-    const text = getTextFromTextArea();
+    const text = markdownInput.value;
     updateCharacterCount(text);
 });
 
-
-const selected= markdownInput.addEventListener("select", function (event) {
-    getSelectedText(event);
+// TODO: Obtener el texto seleccionado
+markdownInput.addEventListener("select", function (event) {
+    selectedText = getSelectedText(event);
 });
 
+// TODO: Cuando hagamos click en el boton applyFormat, tenemos que obtener el texto seleccionado del textarea y trasnformarlo a negrita o cursiva
 applyFormat.addEventListener("click", function () {
-    
-    const text = getTextFromTextArea();
-    const html = applyFormat(text);
-    
+    changeBtnFormat();
+    getTextFromTextArea(convertToHtml);
 });

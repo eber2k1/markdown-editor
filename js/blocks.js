@@ -63,7 +63,3 @@ function getSelectedText(event) {
     const selectedText = event.target.value.substring(start, end);
     return selectedText;
 }
-
-function toggleApplyFormat(text,bold,italic) {
-
-}
