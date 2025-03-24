@@ -14,7 +14,8 @@ const applyFormat = document.querySelector("#apply-format");
 const formatType = document.querySelector("#format-type");
 
 let state = 0;
-let selectedText = "";
+let start = 0;
+let end = 0;
 
 
 function changeBtnFormat() {
@@ -42,11 +43,12 @@ contrastHeadings.addEventListener("click", function () {
 markdownInput.addEventListener("input", function () {
     const text = markdownInput.value;
     updateCharacterCount(text);
+    convertToHtmlAuto(text);
 });
 
 // TODO: Obtener el texto seleccionado
 markdownInput.addEventListener("select", function (event) {
-    selectedText = getSelectedText(event);
+    getStartEnd(event);
 });
 
 // TODO: Cuando hagamos click en el boton applyFormat, tenemos que obtener el texto seleccionado del textarea y trasnformarlo a negrita o cursiva

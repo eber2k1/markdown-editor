@@ -1,19 +1,24 @@
-function toggleFormat(text) {
-    if (state === 0) {
-        text = text.replace(selectedText, selectedText);
-    } else if (state === 1) {
-        text = text.replace(selectedText, `**${selectedText}**`);
+function toggleFormat(text) { 
+    let selectedText = text.substring(start, end);
+
+    if (selectedText.length === 0) return text;
+    let formattedText;
+    if (state === 1) {
+        formattedText = `**${selectedText}**`;
+    } else if (state === 2) {
+        formattedText = `*${selectedText}*`;
     } else {
-        text = text.replace(selectedText, `*${selectedText}*`);
+        formattedText = selectedText;
     }
-    return text;
+
+    return text.substring(0, start) + formattedText + text.substring(end);
 }
 
 
 function getTextFromTextArea(callback) {
     let text = markdownInput.value;
     if (text === "") {
-        alert("Debe ingresar un texto para poder generar el MD");
+        alert("Debe ingresar un texto para poder generar el HTML");
         return;
       }
       text = toggleFormat(text);
@@ -67,6 +72,14 @@ function convertBoldItalic(html) {
     return html;
 }
 
+function convertPreCode(html) {
+    html = html.replace(
+        /```([\s\S]+?)```/gm,
+        "<pre class='p-2 bg-gray-700 text-white rounded-md overflow-x-auto'><code class='whitespace-pre-wrap'>$1</code></pre>"
+    );
+    return html;
+}
+
 function convertToHtml(text) {
     let html = text;
     // evaluamos titulo
@@ -83,7 +96,14 @@ function convertToHtml(text) {
     html = convertListOrdered(html);
     // evaluamos enlaces
     html = convertLinks(html);
+    // evaluamos 
+    renderPreview(html);
+}
 
+function convertToHtmlAuto(text) {
+    let html = text;
+    // evaluamos pre code
+    html = convertPreCode(html);
     renderPreview(html);
 }
 

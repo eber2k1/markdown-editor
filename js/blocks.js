@@ -24,7 +24,6 @@ function toggleContrastHeadings() {
     } else {
         
         headings.forEach((heading) => {
-            
             heading.classList.add('p-2', 'rounded');
             
             switch (heading.tagName) {
@@ -57,9 +56,7 @@ function updateCharacterCount(text) {
   characterCount.textContent = text.length;
 }
 
-function getSelectedText(event) {
-    const start = event.target.selectionStart;
-    const end = event.target.selectionEnd;
-    const selectedText = event.target.value.substring(start, end);
-    return selectedText;
+function getStartEnd(event) {
+    start = event.target.selectionStart;
+    end = event.target.selectionEnd;
 }

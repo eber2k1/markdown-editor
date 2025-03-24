@@ -52,7 +52,10 @@ markdown-editor/
 ├── 📁 css/
 │   └── 📄 styles.css      # Estilos CSS para layout y estructura básica
 ├── 📁 js/
-│   └── 📄 app.js          # Lógica JavaScript para conversión Markdown a HTML
+│   ├── 📄 app.js          # Lógica JavaScript para conversión Markdown a HTML
+│   ├── 📄 blocks.js       # Lógica JavaScript para conversión Markdown a HTML
+│   ├── 📄 format.js     # Lógica JavaScript para conversión Markdown a HTML
+│   └── 📄 lists.js        # Lógica JavaScript para conversión Markdown a HTML
 └── 📄 README.md           # Documentación del proyecto
 ```
 
