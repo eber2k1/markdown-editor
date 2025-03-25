@@ -14,35 +14,33 @@ Este proyecto es un editor de Markdown que permite a los usuarios escribir texto
 
 ## ✨ Características Implementadas
 
-### 📋 Historias de Usuario Completadas
+### Editor en tiempo real
+- ✅ Un textarea permite escribir texto en formato Markdown.
+- ✅ La vista previa se actualiza automáticamente al escribir.
 
-#### 🔍 HU1: Barra de herramientas con botón "Generar Vista Previa"
-- ✅ Implementación de una barra de herramientas fija en la parte superior
-- ✅ Layout responsivo que se adapta a dispositivos móviles y desktop
-- ✅ Zonas claramente definidas para editor y vista previa
-- ✅ Scroll automático cuando el contenido excede el espacio disponible
+### Botones de Formato
+- ✅ Negrita: Convierte el texto seleccionado a **negrita**.
+- ✅ Cursiva: Convierte el texto seleccionado a *cursiva*.
+- ✅ Sin formato: Elimina el formato del texto seleccionado.
 
-#### 🔄 HU2: Generación de Preview usando Regex
-- ✅ Transformación de encabezados Markdown a HTML mediante expresiones regulares
-- ✅ Conversión de listas Markdown a elementos HTML
-- ✅ Actualización instantánea de la vista previa al hacer clic en el botón
+### Botón de Contraste de Encabezados
+- ✅ Aplica estilos visuales a encabezados (# H1, ## H2, etc.), mejorando la visibilidad.
+- ✅ Alterna entre estilos contrastados y normales.
 
-#### 🎨 HU3: Aplicar estilo dinámico a los encabezados
-- ✅ Botón "Contrastar Encabezados" que altera el estilo de los encabezados en la vista previa
-- ✅ Uso de querySelectorAll() para seleccionar y modificar elementos de título
-- ✅ Aplicación dinámica de estilos diferentes según el nivel de encabezado (h1-h6)
-- ✅ Funcionalidad de toggle para activar/desactivar el contraste
+### Borrado de Texto
+- ✅ Botón de Borrar Texto: Elimina todo el contenido del editor.
 
-### 🌟 Logros Adicionales
+### Contador de Caracteres
+- ✅ Muestra en tiempo real la cantidad de caracteres escritos en el editor.
 
-#### 💪 Transformación de contenido en negrita e itálica
-- ✅ Detección y conversión de texto en negrita (**texto**) a elementos HTML `<strong>`
-- ✅ Detección y conversión de texto en itálica (*texto*) a elementos HTML `<em>`
-- ✅ Soporte para texto en negrita e itálica (***texto***) combinados
+### Conversión de Markdown a HTML
+El texto ingresado en Markdown se transforma en HTML, aplicando:
 
-#### 🔢 Contador de caracteres dinámico
-- ✅ Contador que se actualiza automáticamente al escribir texto en el editor
-- ✅ Muestra el número total de caracteres en tiempo real
+- ✅ Conversión de encabezados (H1, H2, H3, etc.)
+- ✅ Conversión de listas (ordenadas y desordenadas) 
+- ✅ Conversión de enlaces [Texto](URL).
+- ✅ Conversión de negrita y cursiva (**negrita** y *cursiva*).
+- ✅ Conversión de código con triple comilla invertida (``` código ```).
 
 ## 📂 Estructura del Proyecto
 
@@ -52,10 +50,10 @@ markdown-editor/
 ├── 📁 css/
 │   └── 📄 styles.css      # Estilos CSS para layout y estructura básica
 ├── 📁 js/
-│   ├── 📄 app.js          # Lógica JavaScript para conversión Markdown a HTML
-│   ├── 📄 blocks.js       # Lógica JavaScript para conversión Markdown a HTML
-│   ├── 📄 format.js     # Lógica JavaScript para conversión Markdown a HTML
-│   └── 📄 lists.js        # Lógica JavaScript para conversión Markdown a HTML
+│   ├── 📄 app.js          # Controla eventos y funciones principales, como formato de texto y actualización de la vista previa.
+│   ├── 📄 blocks.js       # Gestiona estilos para encabezados y el contador de caracteres.
+│   ├── 📄 format.js       # Convierte texto Markdown a HTML aplicando estilos y formatos.
+│   └── 📄 lists.js        # Maneja la conversión de listas ordenadas y desordenadas en la vista previa.
 └── 📄 README.md           # Documentación del proyecto
 ```
 
@@ -81,20 +79,24 @@ markdown-editor/
 ## 📝 Cómo Usar
 
 1. 🖋️ Escribe texto en formato Markdown en el panel izquierdo
-2. 👁️ Haz clic en el botón "Vista Previa" para ver el resultado HTML
+2. 👁️ La vista previa se actualiza automáticamente al escribir.
 3. 🎭 Usa el botón "Contrastar Encabezados" para resaltar los títulos con diferentes colores
 4. 🔢 El contador de caracteres se actualiza automáticamente mientras escribes
+5. 🖍️ Utiliza los botones de formato para aplicar negrita, cursiva o eliminar formato.
+6. 🗑️ Usa el botón "Borrar texto" para limpiar el contenido del editor.
 
 ## 📌 Características de Markdown Soportadas
 
 | Característica | Sintaxis Markdown | Resultado HTML |
 |----------------|-------------------|---------------|
 | Encabezados    | `# Título`        | `<h1>Título</h1>` |
-| Listas         | `* Elemento`      | `<li>Elemento</li>` |
 | Enlaces        | `[texto](url)`    | `<a href="url">texto</a>` |
 | Negrita        | `**texto**`       | `<strong>texto</strong>` |
 | Itálica        | `*texto*`         | `<em>texto</em>` |
 | Negrita+Itálica| `***texto***`     | `<strong><em>texto</em></strong>` |
+| Codigo         | `` `código` ``    | `<code>código</code>` |
+| Listas Ordenadas| `1. Elemento`     | `<ol><li>Elemento</li></ol>` |
+| Listas Desordenadas| `* Elemento`     | `<ul><li>Elemento</li></ul>` |
 
 ## 👨‍💻 Autor
 

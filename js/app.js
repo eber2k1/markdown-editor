@@ -17,6 +17,25 @@ let state = 0;
 let start = 0;
 let end = 0;
 
+
+function debounce(func, delay) {
+    let timeoutId;
+    return function (...args) {
+        clearTimeout(timeoutId);
+        timeoutId = setTimeout(() => {
+            func.apply(this, args);
+        }, delay);
+    };
+}
+
+const debounceEvents = debounce(execEvents, 200);
+
+function execEvents() {
+    getTextFromTextArea(convertToHtml);
+    updateCharacterCount(markdownInput.value);
+    convertToHtmlAuto(markdownInput.value);
+}
+
 function changeBtnFormat() {
     let formats = [
         `<i class="fa-solid fa-bold"></i> <span class="hidden md:block">negrita</span>`,
@@ -43,10 +62,7 @@ applyFormat.addEventListener("click", function () {
     getTextFromTextArea(convertToHtml);
 });
 
-markdownInput.addEventListener("input", function () {
-    getTextFromTextArea(convertToHtml);
-    updateCharacterCount(markdownInput.value);
-});
+markdownInput.addEventListener("input", debounceEvents);
 
 // TODO: Cuando hagamos click en el boton clearText, tenemos que borrar el texto del textarea
 clearText.addEventListener("click", function () {
