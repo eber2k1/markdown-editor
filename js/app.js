@@ -43,6 +43,12 @@ applyFormat.addEventListener("click", function () {
     getTextFromTextArea(convertToHtml);
 });
 
+markdownInput.addEventListener("input", function () {
+  
+    getTextFromTextArea(convertToHtml);
+    updateCharacterCount(markdownInput.value);
+});
+
 // TODO: Cuando hagamos click en el boton clearText, tenemos que borrar el texto del textarea
 clearText.addEventListener("click", function () {
     markdownInput.value = "";
