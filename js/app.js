@@ -43,14 +43,6 @@ contrastHeadings.addEventListener("click", function () {
     toggleContrastHeadings();
 });
 
-// TODO: Cuando hagamos click en el boton generateHtml, tenemos que obtener el texto del textarea y trasnformalo a HTML y eso mostrarlo el preview
-markdownInput.addEventListener("input", function () {
-    const text = markdownInput.value;
-    updateCharacterCount(text);
-    convertToHtmlAuto(text);
-    getTextFromTextArea(convertToHtml);
-});
-
 // TODO: Obtener el texto seleccionado
 markdownInput.addEventListener("select", function (event) {
     getStartEnd(event);
