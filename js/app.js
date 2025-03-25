@@ -44,7 +44,6 @@ applyFormat.addEventListener("click", function () {
 });
 
 markdownInput.addEventListener("input", function () {
-  
     getTextFromTextArea(convertToHtml);
     updateCharacterCount(markdownInput.value);
 });

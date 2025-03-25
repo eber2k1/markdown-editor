@@ -17,11 +17,7 @@ function toggleFormat(text) {
 
 function getTextFromTextArea(callback) {
     let text = markdownInput.value;
-    if (text === "") {
-        alert("Debe ingresar un texto para poder generar el HTML");
-        return;
-      }
-      text = toggleFormat(text);
+    text = toggleFormat(text);
     callback(text);
 }
 
