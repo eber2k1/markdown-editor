@@ -129,6 +129,5 @@ function convertToHtml(text) {
  * Funcion para renderizar el HTML
  */
 function renderPreview(html) {
-    console.log(html)
     previewSection.innerHTML = html;
 }
