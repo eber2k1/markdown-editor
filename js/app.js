@@ -17,17 +17,6 @@ let state = 0;
 let start = 0;
 let end = 0;
 
-function debounce(func, delay) {
-  let timeoutId;
-  return function (...args) {
-    clearTimeout(timeoutId);
-    timeoutId = setTimeout(() => {
-      func.apply(this, args);
-    }, delay);
-  };
-}
-
-
 function changeBtnFormat() {
     let formats = [
         `<i class="fa-solid fa-bold"></i> <span class="hidden md:block">negrita</span>`,
