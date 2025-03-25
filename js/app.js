@@ -1,5 +1,5 @@
-// Boton de generar HTML
-const generateHtml = document.querySelector("#generate-html");
+// Boton de borrar texto
+const clearText = document.querySelector("#clear-text");
 // Textarea de markdown
 const markdownInput = document.querySelector("#markdown-input");
 // Seccion de preview
@@ -17,6 +17,16 @@ let state = 0;
 let start = 0;
 let end = 0;
 
+function debounce(func, delay) {
+  let timeoutId;
+  return function (...args) {
+    clearTimeout(timeoutId);
+    timeoutId = setTimeout(() => {
+      func.apply(this, args);
+    }, delay);
+  };
+}
+
 
 function changeBtnFormat() {
     let formats = [
@@ -28,12 +38,6 @@ function changeBtnFormat() {
     state = (state + 1) % formats.length;
 }
 
-
-// TODO: Cuando hagamos click en el boton generateHtml, tenemos que obtener el texto del textarea y trasnformalo a HTML y eso mostrarlo el preview
-generateHtml.addEventListener("click", function () {
-    getTextFromTextArea(convertToHtml);
-});
-
 // TODO: Cuando hagamos click en el boton contrastHeadings, tenemos que contrastar los encabezados
 contrastHeadings.addEventListener("click", function () {
     toggleContrastHeadings();
@@ -44,6 +48,7 @@ markdownInput.addEventListener("input", function () {
     const text = markdownInput.value;
     updateCharacterCount(text);
     convertToHtmlAuto(text);
+    getTextFromTextArea(convertToHtml);
 });
 
 // TODO: Obtener el texto seleccionado
@@ -56,3 +61,12 @@ applyFormat.addEventListener("click", function () {
     changeBtnFormat();
     getTextFromTextArea(convertToHtml);
 });
+
+// TODO: Cuando hagamos click en el boton clearText, tenemos que borrar el texto del textarea
+clearText.addEventListener("click", function () {
+    markdownInput.value = "";
+    updateCharacterCount(0);
+    renderPreview("");
+});
+
+const debounceCount = debounce(getTextFromTextArea, 200); // milisegundo
