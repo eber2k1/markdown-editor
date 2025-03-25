@@ -1,3 +1,7 @@
+
+/**
+ * Funcion para cambiar el formato del texto
+ */
 function toggleFormat(text) { 
     let selectedText = text.substring(start, end);
 
@@ -15,12 +19,17 @@ function toggleFormat(text) {
 }
 
 
+/**
+ * Funcion para obtener el texto del textarea y trasnformarlo a negrita o cursiva
+ */
 function getTextFromTextArea(callback) {
     let text = markdownInput.value;
-    text = toggleFormat(text);
-    callback(text);
+    callback(toggleFormat(text));
 }
 
+/**
+ * Funcion para convertir los encabezados (solo h1 a h6)
+ */
 function convertHeadings(html) {
     html = html.replace(
         /^# (.+)$/gm,
@@ -48,26 +57,41 @@ function convertHeadings(html) {
     return html;
 }
 
+/**
+ * Funcion para convertir los enlaces
+ */
 function convertLinks(html) {
     html = html.replace(/\[(.+)\]\((.+)\)/gm, "<a href='$2'>$1</a>");
     return html;
 }
 
+/**
+ * Funcion para convertir el texto en negrita
+ */
 function convertBold(html) {
     html = html.replace(/\*\*(.+)\*\*/gm, "<strong>$1</strong>");
     return html;
 }
 
+/**
+ * Funcion para convertir el texto en cursiva
+ */
 function convertItalic(html) {
     html = html.replace(/\*(.+)\*/gm, "<em>$1</em>");
     return html;
 }
 
+/**
+ * Funcion para convertir el texto en negrita y cursiva
+ */
 function convertBoldItalic(html) {
     html = html.replace(/\*\*\*(.+)\*\*\*/gm, "<strong><em>$1</em></strong>");
     return html;
 }
 
+/**
+ * Funcion para convertir el texto en pre code
+ */
 function convertPreCode(html) {
     html = html.replace(
         /```([\s\S]+?)```/gm,
@@ -76,6 +100,9 @@ function convertPreCode(html) {
     return html;
 }
 
+/**
+ * Funcion para convertir el texto en HTML
+ */
 function convertToHtml(text) {
     let html = text;
     // evaluamos titulo
@@ -92,17 +119,16 @@ function convertToHtml(text) {
     html = convertListOrdered(html);
     // evaluamos enlaces
     html = convertLinks(html);
+    // evaluamos pre code
+    html = convertPreCode(html);
     // evaluamos 
     renderPreview(html);
 }
 
-function convertToHtmlAuto(text) {
-    let html = text;
-    // evaluamos pre code
-    html = convertPreCode(html);
-    renderPreview(html);
-}
-
+/**
+ * Funcion para renderizar el HTML
+ */
 function renderPreview(html) {
+    console.log(html)
     previewSection.innerHTML = html;
 }

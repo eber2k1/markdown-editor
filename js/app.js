@@ -13,11 +13,22 @@ const applyFormat = document.querySelector("#apply-format");
 // Texto del boton de aplicar formato
 const formatType = document.querySelector("#format-type");
 
+/**
+ * Estado del formato
+ */
 let state = 0;
+/**
+ * Inicio de la seleccion
+ */
 let start = 0;
+/**
+ * Fin de la seleccion
+ */
 let end = 0;
 
-
+/**
+ * Funcion para debounce
+ */
 function debounce(func, delay) {
     let timeoutId;
     return function (...args) {
@@ -28,45 +39,53 @@ function debounce(func, delay) {
     };
 }
 
-const debounceEvents = debounce(execEvents, 200);
-
+/**
+ * Funcion para ejecutar eventos
+ */
 function execEvents() {
     getTextFromTextArea(convertToHtml);
     updateCharacterCount(markdownInput.value);
-    convertToHtmlAuto(markdownInput.value);
 }
 
-function changeBtnFormat() {
-    let formats = [
-        `<i class="fa-solid fa-bold"></i> <span class="hidden md:block">negrita</span>`,
-        `<i class="fa-solid fa-italic"></i> <span class="hidden md:block">cursiva</span>`,
-        `<i class="fas fa-paint-brush"></i> <span class="hidden md:block">sin formato</span>`
-    ];
-    applyFormat.innerHTML = formats[state];
-    state = (state + 1) % formats.length;
-}
+/**
+ * Funcion para debounce
+ */
+const debounceEvents = debounce(execEvents, 100);
 
-// TODO: Cuando hagamos click en el boton contrastHeadings, tenemos que contrastar los encabezados
+
+
+/**
+ * Funcion para contrastar los encabezados
+ */
 contrastHeadings.addEventListener("click", function () {
     toggleContrastHeadings();
 });
 
-// TODO: Obtener el texto seleccionado
+/**
+ * Funcion para obtener el texto seleccionado
+ */
 markdownInput.addEventListener("select", function (event) {
     getStartEnd(event);
 });
 
-// TODO: Cuando hagamos click en el boton applyFormat, tenemos que obtener el texto seleccionado del textarea y trasnformarlo a negrita o cursiva
+/**
+ * Funcion para obtener el texto seleccionado del textarea y trasnformarlo a negrita o cursiva
+ */
 applyFormat.addEventListener("click", function () {
     changeBtnFormat();
     getTextFromTextArea(convertToHtml);
 });
 
-markdownInput.addEventListener("input", debounceEvents);
-
-// TODO: Cuando hagamos click en el boton clearText, tenemos que borrar el texto del textarea
+/**
+ * Funcion para borrar el texto del textarea
+ */
 clearText.addEventListener("click", function () {
     markdownInput.value = "";
     updateCharacterCount(0);
     renderPreview("");
 });
+
+/**
+ * Funcion para convertir el texto del textarea a HTML
+ */
+markdownInput.addEventListener("input", debounceEvents);
