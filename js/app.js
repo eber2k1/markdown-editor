@@ -60,5 +60,3 @@ clearText.addEventListener("click", function () {
     updateCharacterCount(0);
     renderPreview("");
 });
-
-const debounceCount = debounce(getTextFromTextArea, 200); // milisegundo
