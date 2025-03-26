@@ -6,75 +6,96 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Markdown Editor</title>
     <script src="https://cdn.tailwindcss.com"></script>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
-    <link rel="stylesheet" href="./css/styles.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
+    <link rel="stylesheet" href="./css/styles.css" />
 </head>
 
-<body class="h-screen text-gray-800 bg-gray-700 grid overflow-hidden">
-
-    <header class="header h-[10vh] flex items-center justify-center gap-4 bg-gray-800 shadow-md">
+<body class="h-screen text-gray-900 bg-gray-100 dark:bg-gray-900 dark:text-gray-100 grid overflow-hidden">
+    <header class="header h-[10vh] flex items-center justify-center gap-4 bg-white dark:bg-gray-800 shadow-md">
         <div class="flex space-x-4 my-5">
-            <button 
-                id="clear-text" 
-                class="h-9 px-4 bg-gray-900 hover:bg-gray-700 text-gray-100 border border-gray-700 rounded-md shadow-sm transition-all duration-200 flex items-center space-x-2 transform hover:scale-105">
+            <button id="clear-text"
+                class="h-9 px-4 bg-blue-500 hover:bg-blue-600 text-white border border-blue-600 rounded-md shadow-sm transition-all duration-200 flex items-center space-x-2 transform hover:scale-105 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600">
                 <i class="fas fa-trash"></i>
                 <span class="hidden md:block">Borrar texto</span>
             </button>
-            <button 
-                id="contrast-headings" 
-                class="h-9 px-4 bg-gray-900 hover:bg-gray-700 text-gray-100 border border-gray-700 rounded-md shadow-sm transition-all duration-200 flex items-center space-x-2 transform hover:scale-105">
+            <button id="contrast-headings"
+                class="h-9 px-4 bg-blue-500 hover:bg-blue-600 text-white border border-blue-600 rounded-md shadow-sm transition-all duration-200 flex items-center space-x-2 transform hover:scale-105 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600">
                 <i class="fas fa-heading"></i>
                 <span class="hidden md:block">Contrastar Encabezados</span>
             </button>
-            <button 
-                id="apply-format" 
-                class="h-9 px-4 bg-gray-900 hover:bg-gray-700 text-gray-100 border border-gray-700 rounded-md shadow-sm transition-all duration-200 flex items-center space-x-2 transform hover:scale-105">
-                <i class="fas fa-paint-brush"></i>
-                <span class="hidden md:block">sin formato</span>
+            <button id="apply-format"
+                class="h-9 px-4 bg-blue-500 hover:bg-blue-600 text-white border border-blue-600 rounded-md shadow-sm transition-all duration-200 flex items-center space-x-2 transform hover:scale-105 dark:bg-gray-700 dark:hover:bg-gray-600 dark:border-gray-600">
+                <i class="fas fa-bold"></i>
+                <span class="hidden md:block">Aplicar formato</span>
             </button>
         </div>
     </header>
 
-    <main class="main-content h-[83vh] flex flex-col lg:flex-row p-4 gap-6 overflow-auto">
-        <div class="w-full h-full flex flex-col rounded-lg shadow-md overflow-hidden">
-            <div class="bg-gray-800 text-gray-100 px-4 py-2 flex items-center">
+    <div id="alert-headings"
+        class="hidden fixed top-20 right-5 z-50 flex items-center p-4 text-red-800 bg-red-100 border border-red-300 rounded-lg shadow-lg dark:bg-gray-900 dark:text-red-400 transition-transform transform scale-100 hover:scale-105"
+        role="alert">
+        <i class="fa-solid fa-circle-exclamation text-red-500 text-lg"></i>
+        <span class="sr-only">Info</span>
+        <div class="ml-3 text-sm font-medium">
+            No hay cabecera (#) en el area de texto
+        </div>
+        <button type="button"
+            id="close-alert-headings"
+            class="ml-auto bg-transparent text-red-600 rounded-lg focus:ring-2 focus:ring-red-400 p-1.5 hover:bg-red-200 dark:hover:bg-gray-700"
+            data-dismiss-target="#alert-headings" aria-label="Close">
+            <span class="sr-only">Close</span>
+            <i class="fa-solid fa-xmark text-lg"></i>
+        </button>
+    </div>
+
+    <main class="main-content h-[79vh] flex flex-col lg:flex-row p-4 gap-6 overflow-auto">
+        <div class="w-full h-full flex flex-col rounded-lg shadow-md overflow-hidden bg-white dark:bg-gray-800">
+            <div class="bg-blue-500 text-white px-4 py-2 flex items-center dark:bg-gray-700">
                 <i class="fas fa-edit mr-2"></i>
                 <span class="font-medium">Editor Markdown</span>
             </div>
-            <textarea id="markdown-input" 
-            class="w-full flex-grow p-4 border-0 focus:ring-0 focus:outline-none bg-gray-50" 
-            placeholder="Escribe tu markdown aquí..."></textarea>
+            <textarea id="markdown-input"
+                class="w-full flex-grow p-4 border-0 focus:ring-0 focus:outline-none bg-gray-50 dark:bg-gray-900 dark:text-gray-100"
+                placeholder="Escribe tu markdown aquí..."></textarea>
         </div>
 
-        <div class="w-full h-full flex flex-col rounded-lg shadow-md overflow-hidden">
-            <div class="bg-gray-800 text-gray-100 px-4 py-2 flex items-center">
+        <div class="w-full h-full flex flex-col rounded-lg shadow-md overflow-hidden bg-white dark:bg-gray-800">
+            <div class="bg-blue-500 text-white px-4 py-2 flex items-center dark:bg-gray-700">
                 <i class="fas fa-file-alt mr-2"></i>
-                <span class="font-medium ">Vista Previa</span>
+                <span class="font-medium">Vista Previa</span>
             </div>
-            <div 
-                id="preview-section" 
-                class="w-full flex-grow p-4 overflow-y-auto break-words whitespace-normal bg-gray-50">
+            <div id="preview-section"
+                class="w-full flex-grow p-4 overflow-y-auto break-words whitespace-normal bg-gray-50 dark:bg-gray-900 dark:text-gray-100">
                 Previsualización
             </div>
-            <div class="bg-gray-50 p-2 flex items-center gap-2">
+            <div class="bg-gray-50 dark:bg-gray-800 p-2 flex items-center gap-2">
                 <i class="fa-solid fa-keyboard"></i>
                 <span id="character-count">0</span>
             </div>
         </div>
     </main>
 
-    <footer class="footer h-[7vh] bg-gray-900 text-gray-300 flex items-center justify-center shadow-inner">
+    <footer
+        class="footer h-[7vh] bg-gray-200 text-gray-700 flex items-center justify-center shadow-inner dark:bg-gray-900 dark:text-gray-300">
         <p class="flex items-center">
-            <span> 2025 Markdown Editor - Creado por</span>
-            <i class="fa-brands fa-github mx-2 text-gray-100"></i>
-            <a href="https://github.com/eber2k1" class="text-blue-400 hover:text-blue-300 hover:underline transition-colors">eber2k1</a>
+            <span>2025 Markdown Editor - Creado por</span>
+            <i class="fa-brands fa-github mx-2 text-gray-900 dark:text-gray-100"></i>
+            <a href="https://github.com/eber2k1"
+                class="text-blue-500 hover:text-blue-400 hover:underline transition-colors dark:text-blue-400 dark:hover:text-blue-300">eber2k1</a>
         </p>
     </footer>
+
+    <button id="theme-toggle" type="button"
+        class="fixed bottom-5 right-5 w-10 h-10 z-50 p-2 rounded-full shadow-lg text-white transition-all duration-300 ease-in-out hover:shadow-xl transform hover:scale-110 bg-blue-500 hover:bg-blue-600 dark:bg-gray-700 dark:text-white">
+        <i id="theme-toggle-dark-icon" class="fa-solid fa-moon hidden"></i>
+        <i id="theme-toggle-light-icon" class="fa-solid fa-sun hidden"></i>
+    </button>
 
     <script src="./js/app.js"></script>
     <script src="./js/lists.js"></script>
     <script src="./js/format.js"></script>
     <script src="./js/blocks.js"></script>
+    <script src="./js/darkmode.js"></script>
 </body>
 
 </html>

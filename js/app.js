@@ -12,6 +12,10 @@ const characterCount = document.querySelector("#character-count");
 const applyFormat = document.querySelector("#apply-format");
 // Texto del boton de aplicar formato
 const formatType = document.querySelector("#format-type");
+// Alerta de encabezados
+const alertHeadings = document.querySelector("#alert-headings");
+// Boton de cerrar alerta
+const closeAlertHeadings = document.querySelector("#close-alert-headings");
 
 /**
  * Estado del formato
@@ -44,7 +48,7 @@ function debounce(func, delay) {
  */
 function execEvents() {
     getTextFromTextArea(convertToHtml);
-    updateCharacterCount(markdownInput.value);
+
 }
 
 /**
@@ -52,13 +56,16 @@ function execEvents() {
  */
 const debounceEvents = debounce(execEvents, 100);
 
-
+/**
+ * Funcion para convertir el texto del textarea a HTML
+ */
+markdownInput.addEventListener("input", debounceEvents);
 
 /**
  * Funcion para contrastar los encabezados
  */
 contrastHeadings.addEventListener("click", function () {
-    toggleContrastHeadings();
+    hasHeadings();
 });
 
 /**
@@ -81,11 +88,13 @@ applyFormat.addEventListener("click", function () {
  */
 clearText.addEventListener("click", function () {
     markdownInput.value = "";
-    updateCharacterCount(0);
+    updateCharacterCount("");
     renderPreview("");
 });
 
 /**
- * Funcion para convertir el texto del textarea a HTML
+ * Funcion para cerrar la alerta
  */
-markdownInput.addEventListener("input", debounceEvents);
+closeAlertHeadings.addEventListener("click", function () {
+    alertHeadings.classList.add("hidden");
+});

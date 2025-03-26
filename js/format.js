@@ -15,7 +15,9 @@ function toggleFormat(text) {
         formattedText = selectedText;
     }
 
-    return text.substring(0, start) + formattedText + text.substring(end);
+    selectedText = text.substring(0, start) + formattedText + text.substring(end);
+
+    return selectedText;
 }
 
 
@@ -25,6 +27,7 @@ function toggleFormat(text) {
 function getTextFromTextArea(callback) {
     let text = markdownInput.value;
     callback(toggleFormat(text));
+    updateCharacterCount(text);
 }
 
 /**
@@ -130,4 +133,15 @@ function convertToHtml(text) {
  */
 function renderPreview(html) {
     previewSection.innerHTML = html;
+}
+
+
+function hasHeadings() {
+    if (markdownInput.value.match(/^#{1,6} .+/gm)) {
+        return toggleContrastHeadings();
+    }
+    alertHeadings.classList.remove("hidden");
+    setTimeout(() => {
+        alertHeadings.classList.add("hidden");
+    }, 3000);
 }
