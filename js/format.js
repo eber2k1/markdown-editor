@@ -25,9 +25,16 @@ function toggleFormat(text) {
  * Funcion para obtener el texto del textarea y trasnformarlo a negrita o cursiva
  */
 function getTextFromTextArea(callback) {
-    let text = markdownInput.value;
-    callback(toggleFormat(text));
-    updateCharacterCount(text);
+    return new Promise((resolve, reject) => {
+        const text = markdownInput.value;
+        setTimeout(() => {
+            if (text !== " ") {
+                resolve(callback(toggleFormat(text)), updateCharacterCount(text));
+            } else {
+                reject("No hay texto en el textarea");
+            }
+        }, 100);
+    });
 }
 
 /**
@@ -98,7 +105,7 @@ function convertBoldItalic(html) {
 function convertPreCode(html) {
     html = html.replace(
         /```([\s\S]+?)```/gm,
-        "<pre class='p-2 bg-gray-700 text-white rounded-md overflow-x-auto'><code class='whitespace-pre-wrap'>$1</code></pre>"
+        "<pre class='max-w-full p-2 bg-gray-700 text-white rounded-md overflow-x-auto'><code class='whitespace-pre-wrap'>$1</code></pre>"
     );
     return html;
 }
@@ -107,6 +114,7 @@ function convertPreCode(html) {
  * Funcion para convertir el texto en HTML
  */
 function convertToHtml(text) {
+
     let html = text;
     // evaluamos titulo
     html = convertHeadings(html);

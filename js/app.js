@@ -17,6 +17,9 @@ const alertHeadings = document.querySelector("#alert-headings");
 // Boton de cerrar alerta
 const closeAlertHeadings = document.querySelector("#close-alert-headings");
 
+const inputFile = document.querySelector("#input-file");
+
+const loading = document.querySelector("#loading");
 /**
  * Estado del formato
  */
@@ -30,36 +33,56 @@ let start = 0;
  */
 let end = 0;
 
-/**
- * Funcion para debounce
- */
-function debounce(func, delay) {
-    let timeoutId;
-    return function (...args) {
-        clearTimeout(timeoutId);
-        timeoutId = setTimeout(() => {
-            func.apply(this, args);
-        }, delay);
-    };
-}
+
+function readFileAsPromise(file) {
+    return new Promise((resolve, reject) => {
+      const lector = new FileReader();
+  
+      setTimeout(() => {
+        lector.readAsText(file);
+  
+        lector.onload = function () {
+          resolve(lector.result);
+        };
+  
+        lector.onerror = function () {
+          reject("Error al leer el archivo");
+        };
+      }, 2000);
+    });
+  }
+
 
 /**
- * Funcion para ejecutar eventos
+ * Funcion para cargar un archivo
  */
-function execEvents() {
-    getTextFromTextArea(convertToHtml);
-
-}
-
-/**
- * Funcion para debounce
- */
-const debounceEvents = debounce(execEvents, 100);
+inputFile.addEventListener("change", async function (event) {
+    const archivo = event.target.files[0];
+  
+    loading.classList.remove("hidden");
+  
+    try {
+      const text = await readFileAsPromise(archivo);
+      markdownInput.value = text;
+      await getTextFromTextArea(convertToHtml);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      loading.classList.add("hidden");
+    }
+  });
+  
 
 /**
  * Funcion para convertir el texto del textarea a HTML
  */
-markdownInput.addEventListener("input", debounceEvents);
+markdownInput.addEventListener("input", async function () {
+    try {
+        await getTextFromTextArea(convertToHtml);
+    } catch (error) {
+        console.log(error);
+    }
+});
 
 /**
  * Funcion para contrastar los encabezados
@@ -89,7 +112,9 @@ applyFormat.addEventListener("click", function () {
 clearText.addEventListener("click", function () {
     markdownInput.value = "";
     updateCharacterCount("");
-    renderPreview("");
+    renderPreview("Previsualización");
+    inputFile.value = "";
+    document.getElementById('file-name-display').textContent = 'Ningún archivo seleccionado';
 });
 
 /**

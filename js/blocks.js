@@ -79,4 +79,3 @@ function changeBtnFormat() {
     applyFormat.innerHTML = formats[state];
     state = (state + 1) % formats.length;
 }
-
