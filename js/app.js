@@ -53,4 +53,5 @@ clearText.addEventListener("click", function () {
     markdownInput.value = "";
     updateCharacterCount(0);
     renderPreview("");
+    
 });
