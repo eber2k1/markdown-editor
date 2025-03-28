@@ -42,6 +42,12 @@ El texto ingresado en Markdown se transforma en HTML, aplicando:
 - ✅ Conversión de negrita y cursiva (**negrita** y *cursiva*).
 - ✅ Conversión de código con triple comilla invertida (``` código ```).
 
+### Cargar un archivo
+- ✅ Botón de Cargar Archivo: Permite cargar archivos Markdown (.md).
+
+### Modo Oscuro
+- ✅ Alternancia entre modo oscuro y claro.
+
 ## 📂 Estructura del Proyecto
 
 ```
@@ -52,8 +58,12 @@ markdown-editor/
 ├── 📁 js/
 │   ├── 📄 app.js          # Controla eventos y funciones principales, como formato de texto y actualización de la vista previa.
 │   ├── 📄 blocks.js       # Gestiona estilos para encabezados y el contador de caracteres.
+│   ├── 📄 contrastHeadings.js # Funcionalidad para contrastar encabezados
+│   ├── 📄 darkmode.js     # Gestiona el modo oscuro
+│   ├── 📄 file-name.js    # Gestiona el nombre del archivo
 │   ├── 📄 format.js       # Convierte texto Markdown a HTML aplicando estilos y formatos.
-│   └── 📄 lists.js        # Maneja la conversión de listas ordenadas y desordenadas en la vista previa.
+│   ├── 📄 lists.js        # Maneja la conversión de listas ordenadas y desordenadas en la vista previa.
+│   └── 📄 readFile.js     # Gestiona la lectura de archivos
 └── 📄 README.md           # Documentación del proyecto
 ```
 
