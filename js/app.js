@@ -16,110 +16,72 @@ const formatType = document.querySelector("#format-type");
 const alertHeadings = document.querySelector("#alert-headings");
 // Boton de cerrar alerta
 const closeAlertHeadings = document.querySelector("#close-alert-headings");
-
+// Input de archivo
 const inputFile = document.querySelector("#input-file");
-
+// Loading
 const loading = document.querySelector("#loading");
-/**
- * Estado del formato
- */
+
+//  VARIABLES GLOBALES
+
+// Estado del formato
 let state = 0;
-/**
- * Inicio de la seleccion
- */
+// Inicio de la seleccion
 let start = 0;
-/**
- * Fin de la seleccion
- */
+// Fin de la seleccion
 let end = 0;
 
 
-function readFileAsPromise(file) {
-    return new Promise((resolve, reject) => {
-      const lector = new FileReader();
-  
-      setTimeout(() => {
-        lector.readAsText(file);
-  
-        lector.onload = function () {
-          resolve(lector.result);
-        };
-  
-        lector.onerror = function () {
-          reject("Error al leer el archivo");
-        };
-      }, 2000);
-    });
-  }
-
-
-/**
- * Funcion para cargar un archivo
- */
-inputFile.addEventListener("change", async function (event) {
-    const archivo = event.target.files[0];
-  
-    loading.classList.remove("hidden");
-  
-    try {
-      const text = await readFileAsPromise(archivo);
-      markdownInput.value = text;
-      await getTextFromTextArea(convertToHtml);
-    } catch (error) {
-      console.log(error);
-    } finally {
-      loading.classList.add("hidden");
-    }
-  });
-  
-
-/**
- * Funcion para convertir el texto del textarea a HTML
- */
+//Funcion para convertir el texto del textarea a HTML
 markdownInput.addEventListener("input", async function () {
-    try {
-        await getTextFromTextArea(convertToHtml);
-    } catch (error) {
-        console.log(error);
-    }
+  try {
+    await getTextFromTextArea(convertToHtml);
+  } catch (error) {
+    console.log(error);
+  }
 });
 
-/**
- * Funcion para contrastar los encabezados
- */
-contrastHeadings.addEventListener("click", function () {
-    hasHeadings();
+//Funcion para cargar un archivo
+inputFile.addEventListener("change", async function (event) {
+  const archivo = event.target.files[0];
+  loading.classList.remove("hidden");
+  try {
+    const text = await readFileAsPromise(archivo);
+    markdownInput.value = text;
+    await getTextFromTextArea(convertToHtml);
+  } catch (error) {
+    console.log(error);
+  } finally {
+    loading.classList.add("hidden");
+  }
 });
 
-/**
- * Funcion para obtener el texto seleccionado
- */
-markdownInput.addEventListener("select", function (event) {
-    getStartEnd(event);
-});
-
-/**
- * Funcion para obtener el texto seleccionado del textarea y trasnformarlo a negrita o cursiva
- */
-applyFormat.addEventListener("click", function () {
-    changeBtnFormat();
-    getTextFromTextArea(convertToHtml);
-});
-
-/**
- * Funcion para borrar el texto del textarea
- */
+//Funcion para borrar el texto del textarea
 clearText.addEventListener("click", function () {
-    markdownInput.value = "";
-    updateCharacterCount("");
-    renderPreview("Previsualización");
-    inputFile.value = "";
-    document.getElementById('file-name-display').textContent = 'Ningún archivo seleccionado';
+  markdownInput.value = "";
+  updateCharacterCount("");
+  renderPreview("Previsualización");
+  inputFile.value = "";
+  document.getElementById("file-name-display").textContent =
+    "Ningún archivo seleccionado";
 });
 
-/**
- * Funcion para cerrar la alerta
- */
+//Funcion para contrastar los encabezados
+contrastHeadings.addEventListener("click", function () {
+  hasHeadings();
+});
+
+//Funcion para obtener el texto seleccionado
+markdownInput.addEventListener("select", function (event) {
+  getStartEnd(event);
+});
+
+//Funcion para obtener el texto seleccionado del textarea y trasnformarlo a negrita o cursiva
+applyFormat.addEventListener("click", function () {
+  changeBtnFormat();
+  getTextFromTextArea(convertToHtml);
+});
+
+//Funcion para cerrar la alerta
 closeAlertHeadings.addEventListener("click", function () {
-    alertHeadings.classList.add("hidden");
+  alertHeadings.classList.add("hidden");
 });

@@ -43,25 +43,27 @@ function getTextFromTextArea(callback) {
 function convertHeadings(html) {
     html = html.replace(
         /^# (.+)$/gm,
-        "<h1 class='text-6xl font-bold border-b'>$1</h1>"
+        "<h1 class='text-6xl font-extrabold border-b-2 pb-2 mb-6 text-gray-900 dark:text-gray-100'>$1</h1>"
     );
-    // ## titulo -> <h2>titulo</h2>
     html = html.replace(
         /^## (.+)$/gm,
-        "<h2 class='text-5xl font-bold border-b'>$1</h2>"
+        "<h2 class='text-5xl font-semibold border-b-2 pb-2 mb-5 text-gray-800 dark:text-gray-200'>$1</h2>"
     );
-    html = html.replace(/^### (.+)$/gm, "<h3 class='text-4xl font-bold'>$1</h3>");
+    html = html.replace(
+        /^### (.+)$/gm,
+        "<h3 class='text-4xl font-semibold border-b-2 pb-1 mb-4 text-gray-700 dark:text-gray-300'>$1</h3>"
+    );
     html = html.replace(
         /^#### (.+)$/gm,
-        "<h4 class='text-3xl font-bold'>$1</h4>"
+        "<h4 class='text-3xl font-medium text-gray-600 dark:text-gray-400'>$1</h4>"
     );
     html = html.replace(
         /^##### (.+)$/gm,
-        "<h5 class='text-2xl font-bold'>$1</h5>"
+        "<h5 class='text-2xl font-medium text-gray-500 dark:text-gray-600'>$1</h5>"
     );
     html = html.replace(
         /^###### (.+)$/gm,
-        "<h6 class='text-xl font-bold'>$1</h6>"
+        "<h6 class='text-xl font-medium text-gray-400 dark:text-gray-700'>$1</h6>"
     );
 
     return html;
@@ -103,9 +105,12 @@ function convertBoldItalic(html) {
  * Funcion para convertir el texto en pre code
  */
 function convertPreCode(html) {
+    // Reemplaza el código entre ``` con un contenedor <pre> y <code>
     html = html.replace(
         /```([\s\S]+?)```/gm,
-        "<pre class='max-w-full p-2 bg-gray-700 text-white rounded-md overflow-x-auto'><code class='whitespace-pre-wrap'>$1</code></pre>"
+        "<pre class='max-w-full p-2 bg-gray-700 text-white rounded-md overflow-x-auto'><code class='whitespace-pre-wrap'>" +
+        "$1" +
+        "</code></pre>"
     );
     return html;
 }

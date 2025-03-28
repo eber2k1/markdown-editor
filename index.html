@@ -4,11 +4,9 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Markdown Editor</title>
+
     <script src="https://cdn.tailwindcss.com"></script>
-    <link
-      rel="stylesheet"
-      href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
-    />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" />
     <link rel="stylesheet" href="./css/styles.css" />
   </head>
 
@@ -37,7 +35,6 @@
           <i class="fas fa-folder-open text-lg"></i>
           <span>Subir archivo</span>
         </label>
-
         <span
           id="file-name-display"
           class="text-gray-600 text-sm max-w-full truncate hidden sm:block"
@@ -45,6 +42,7 @@
           Ningún archivo seleccionado
         </span>
       </div>
+
       <div class="flex items-center space-x-4 my-5">
         <button
           id="clear-text"
@@ -122,7 +120,7 @@
         </div>
         <div
           id="preview-section"
-          class="w-full flex-grow p-4 overflow-y-auto break-words whitespace-normal bg-gray-50 dark:bg-gray-900 dark:text-gray-100"
+          class="w-full flex-grow p-4 overflow-y-auto break-words whitespace-pre-wrap bg-gray-50 dark:bg-gray-900 dark:text-gray-100"
         >
           Previsualización
         </div>
@@ -162,6 +160,8 @@
     <script src="./js/lists.js"></script>
     <script src="./js/format.js"></script>
     <script src="./js/blocks.js"></script>
+    <script src="./js/readFile.js"></script>
+    <script src="./js/contrastHeadings.js"></script>
     <script src="./js/darkmode.js"></script>
     <script src="./js/file-name.js"></script>
   </body>
