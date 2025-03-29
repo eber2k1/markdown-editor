@@ -1,6 +1,8 @@
 
+/**
+ * Funcion para convertir listas desordenadas
+ */
 function convertListUnordered(html) {
-    // Identificamos bloques de listas con indentación
     let lines = html.split('\n');
     let inList = false;
     let result = [];
@@ -28,8 +30,10 @@ function convertListUnordered(html) {
     return result.join('\n');
 }
 
+/**
+ * Funcion para convertir listas ordenadas
+ */
 function convertListOrdered(html) {
-    // Identificamos bloques de listas con indentación
     let lines = html.split('\n');
     let inList = false;
     let result = [];

@@ -12,46 +12,76 @@ const characterCount = document.querySelector("#character-count");
 const applyFormat = document.querySelector("#apply-format");
 // Texto del boton de aplicar formato
 const formatType = document.querySelector("#format-type");
+// Alerta de encabezados
+const alertHeadings = document.querySelector("#alert-headings");
+// Boton de cerrar alerta
+const closeAlertHeadings = document.querySelector("#close-alert-headings");
+// Input de archivo
+const inputFile = document.querySelector("#input-file");
+// Loading
+const loading = document.querySelector("#loading");
 
+//  VARIABLES GLOBALES
+
+// Estado del formato
 let state = 0;
+// Inicio de la seleccion
 let start = 0;
+// Fin de la seleccion
 let end = 0;
 
-function changeBtnFormat() {
-    let formats = [
-        `<i class="fa-solid fa-bold"></i> <span class="hidden md:block">negrita</span>`,
-        `<i class="fa-solid fa-italic"></i> <span class="hidden md:block">cursiva</span>`,
-        `<i class="fas fa-paint-brush"></i> <span class="hidden md:block">sin formato</span>`
-    ];
-    applyFormat.innerHTML = formats[state];
-    state = (state + 1) % formats.length;
-}
 
-// TODO: Cuando hagamos click en el boton contrastHeadings, tenemos que contrastar los encabezados
-contrastHeadings.addEventListener("click", function () {
-    toggleContrastHeadings();
+//Funcion para convertir el texto del textarea a HTML
+markdownInput.addEventListener("input", async function () {
+  try {
+    await getTextFromTextArea(convertToHtml);
+  } catch (error) {
+    console.log(error);
+  }
 });
 
-// TODO: Obtener el texto seleccionado
-markdownInput.addEventListener("select", function (event) {
-    getStartEnd(event);
+//Funcion para cargar un archivo
+inputFile.addEventListener("change", async function (event) {
+  const archivo = event.target.files[0];
+  loading.classList.remove("hidden");
+  try {
+    const text = await readFileAsPromise(archivo);
+    markdownInput.value = text;
+    await getTextFromTextArea(convertToHtml);
+  } catch (error) {
+    console.log(error);
+  } finally {
+    loading.classList.add("hidden");
+  }
 });
 
-// TODO: Cuando hagamos click en el boton applyFormat, tenemos que obtener el texto seleccionado del textarea y trasnformarlo a negrita o cursiva
-applyFormat.addEventListener("click", function () {
-    changeBtnFormat();
-    getTextFromTextArea(convertToHtml);
-});
-
-markdownInput.addEventListener("input", function () {
-    getTextFromTextArea(convertToHtml);
-    updateCharacterCount(markdownInput.value);
-});
-
-// TODO: Cuando hagamos click en el boton clearText, tenemos que borrar el texto del textarea
+//Funcion para borrar el texto del textarea
 clearText.addEventListener("click", function () {
-    markdownInput.value = "";
-    updateCharacterCount(0);
-    renderPreview("");
-    
+  markdownInput.value = "";
+  updateCharacterCount("");
+  renderPreview("Previsualización");
+  inputFile.value = "";
+  document.getElementById("file-name-display").textContent =
+    "Ningún archivo seleccionado";
+});
+
+//Funcion para contrastar los encabezados
+contrastHeadings.addEventListener("click", function () {
+  hasHeadings();
+});
+
+//Funcion para obtener el texto seleccionado
+markdownInput.addEventListener("select", function (event) {
+  getStartEnd(event);
+});
+
+//Funcion para obtener el texto seleccionado del textarea y trasnformarlo a negrita o cursiva
+applyFormat.addEventListener("click", function () {
+  changeBtnFormat();
+  getTextFromTextArea(convertToHtml);
+});
+
+//Funcion para cerrar la alerta
+closeAlertHeadings.addEventListener("click", function () {
+  alertHeadings.classList.add("hidden");
 });
